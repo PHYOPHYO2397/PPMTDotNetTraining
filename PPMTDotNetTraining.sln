@@ -5,11 +5,6 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPMTDotNetTraining.ConsoleApp", "PPMTDotNetTraining.ConsoleApp\PPMTDotNetTraining.ConsoleApp.csproj", "{8977CCEE-AA29-427A-AE3E-51F84DC8EE90}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{6833E4E1-2EC3-406E-BDA2-1CD21EB96C39}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Users\yukin\Downloads\README.md = C:\Users\yukin\Downloads\README.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
