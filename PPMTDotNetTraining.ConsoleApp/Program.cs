@@ -80,21 +80,51 @@ string content= Console.ReadLine();
 string connectionString2 = "Data Source=DESKTOP-3HK6N3Q;Initial Catalog=PPMTDotNetTraining;User ID=sa;Password=sasa@123";
 SqlConnection connection2 = new SqlConnection(connectionString2);
 connection2.Open();
-String Query2 = $@"
+
+//BAD example
+//SQL Injection can occur
+
+//String Query2 = $@"
+//INSERT INTO [dbo].[Tbl_Blog]
+//           ([BlogTitle]
+//           ,[BlogAuthor]
+//           ,[BlogContent]
+//           ,[DeleteFlag])
+//     VALUES
+//           ('{title}'
+//           ,'{author}'
+//           ,'{content}'
+//           ,0)";
+
+String Query2 = @"
 INSERT INTO [dbo].[Tbl_Blog]
            ([BlogTitle]
            ,[BlogAuthor]
            ,[BlogContent]
            ,[DeleteFlag])
      VALUES
-           ('{title}'
-           ,'{author}'
-           ,'{content}'
-           ,0)";
-SqlCommand cmd2 =new SqlCommand(Query2,connection2);
-SqlDataAdapter adapter = new SqlDataAdapter(cmd2);
-DataTable dt = new DataTable();
-adapter.Fill(dt);
+           (@BlogTitle,
+           @BlogAuthor,
+           @BlogContent,
+0)";
+
+
+
+
+SqlCommand cmd2 = new SqlCommand(Query2, connection2);
+cmd2.Parameters.AddWithValue("@BlogTitle",title);
+cmd2.Parameters.AddWithValue("@BlogAuthor", author);
+cmd2.Parameters.AddWithValue("@BlogContent", content);
+int result = cmd2.ExecuteNonQuery();
 connection2.Close();
+//if (result ==1)
+//{
+//    Console.WriteLine("Saving Successful");
+//}
+//else
+//{
+//    Console.WriteLine("Saving Failed");
+//}
 
-
+//Ternary Operator
+Console.WriteLine(result==1?"Saving Successful":"Saving Failed");
