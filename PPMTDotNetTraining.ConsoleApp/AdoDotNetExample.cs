@@ -123,7 +123,6 @@ namespace PPMTDotNetTraining.ConsoleApp
 
         }
 
-       
         public void Edit()
 
 
@@ -159,15 +158,56 @@ namespace PPMTDotNetTraining.ConsoleApp
             Console.WriteLine(dr["DeleteFlag"]);
 
 
-
-
-
-
-
-
             connection.Close();
 
         }
+
+        public void Update()
+        {
+
+
+            Console.Write("Blog Id:");
+            string id = Console.ReadLine();
+            //ReadLine return string type only
+
+            Console.Write("Blog Title:");
+            string title = Console.ReadLine();
+
+            Console.Write("Blog Author:");
+            string author = Console.ReadLine();
+
+            Console.Write("Blog Content:");
+            string content = Console.ReadLine();
+
+
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+
+            String Query = @"UPDATE [dbo].[Tbl_Blog]
+            SET [BlogTitle] =@BlogTitle
+           ,[BlogAuthor] = @BlogAuthor
+           ,[BlogContent] = @BlogContent
+          ,[DeleteFlag] = 0
+           WHERE [BlogId] =@BlogId";
+
+
+            SqlCommand cmd = new SqlCommand(Query, connection);
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
+            cmd.Parameters.AddWithValue("@BlogAuthor", author);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
+        
+
+            cmd.Parameters.AddWithValue("@BlogId", id);
+
+            int result = cmd.ExecuteNonQuery();
+            connection.Close();
+            Console.WriteLine(result == 1 ? "Updating Successful" : "Updating Failed");
+
+
+        }
+
+        
     }
 
 }
