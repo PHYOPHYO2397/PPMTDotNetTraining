@@ -20,5 +20,6 @@ using PPMTDotNetTraining.ConsoleApp;
 
 AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
 //adoDotNetExample.Read();
-adoDotNetExample.Create();
+//adoDotNetExample.Create();
+adoDotNetExample.Edit();
 

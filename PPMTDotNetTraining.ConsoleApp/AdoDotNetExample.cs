@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -49,8 +50,6 @@ namespace PPMTDotNetTraining.ConsoleApp
             Console.ReadKey();
         }
          
-
-
        public void Create()
         {
             //foreach (DataRow dr in dt.Rows)
@@ -124,7 +123,51 @@ namespace PPMTDotNetTraining.ConsoleApp
 
         }
 
+       
+        public void Edit()
 
+
+        {
+
+            Console.Write("BlogId:");
+            string id=Console.ReadLine();
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            string query = @"SELECT [BlogId]
+            ,[BlogTitle]
+           ,[BlogAuthor]
+           ,[BlogContent]
+           ,[DeleteFlag]
+           FROM [dbo].[Tbl_Blog] WHERE [BlogId]=@BlogId";
+            SqlCommand cmd = new SqlCommand(query,connection);
+       
+            cmd.Parameters.AddWithValue("@BlogId",id);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            if (dt.Rows.Count == 0) {
+                Console.WriteLine("No Data Found");
+                return;
+            }
+
+            DataRow dr = dt.Rows[0];
+            Console.WriteLine(dr["BlogId"]);
+            Console.WriteLine(dr["BlogTitle"]);
+            Console.WriteLine(dr["BlogAuthor"]);
+            Console.WriteLine(dr["BlogContent"]);
+            Console.WriteLine(dr["DeleteFlag"]);
+
+
+
+
+
+
+
+
+            connection.Close();
+
+        }
     }
 
 }
