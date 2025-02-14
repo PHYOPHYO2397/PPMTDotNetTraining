@@ -207,7 +207,26 @@ namespace PPMTDotNetTraining.ConsoleApp
 
         }
 
-        
+        public void Delete()
+        {
+
+            Console.Write("BlogId:");
+            string id = Console.ReadLine();
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+            string query = @"DELETE FROM [dbo].[Tbl_Blog]
+            WHERE BlogId =@BlogId";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            connection.Close();
+
+
+        }
+
+
     }
 
 }
