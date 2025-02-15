@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using PPMTDotNetTraining.ConsoleApp.Models;
 
 namespace PPMTDotNetTraining.ConsoleApp
 {
@@ -23,14 +24,12 @@ namespace PPMTDotNetTraining.ConsoleApp
       ,[BlogContent]
       ,[DeleteFlag]
   FROM [dbo].[Tbl_Blog]";
-               var lst= db.Query(query).ToList();
+               var lst= db.Query<BlogDataModel>(query).ToList();
                 foreach (var item in lst) {
                     Console.WriteLine(item.BlogTitle);
                     Console.WriteLine(item.BlogId);
                     Console.WriteLine(item.BlogAuthor);
                     Console.WriteLine(item.BlogContent);
-
-
 
                 }
             }
