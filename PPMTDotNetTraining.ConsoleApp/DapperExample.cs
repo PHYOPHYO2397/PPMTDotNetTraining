@@ -17,15 +17,17 @@ namespace PPMTDotNetTraining.ConsoleApp
 
         public void Read()
         {
-            using(IDbConnection db = new SqlConnection(_connectionString))
-            { string query = @"SELECT [BlogId]
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = @"SELECT [BlogId]
       ,[BlogTitle]
       ,[BlogAuthor]
       ,[BlogContent]
       ,[DeleteFlag]
   FROM [dbo].[Tbl_Blog]";
-               var lst= db.Query<BlogDataModel>(query).ToList();
-                foreach (var item in lst) {
+                var lst = db.Query<BlogDataModel>(query).ToList();
+                foreach (var item in lst)
+                {
                     Console.WriteLine(item.BlogTitle);
                     Console.WriteLine(item.BlogId);
                     Console.WriteLine(item.BlogAuthor);
@@ -33,6 +35,39 @@ namespace PPMTDotNetTraining.ConsoleApp
 
                 }
             }
+
+        }
+
+        public void Create(string title, string author, string content)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                String Query = @"
+            INSERT INTO [dbo].[Tbl_Blog]
+           ([BlogTitle]
+           ,[BlogAuthor]
+           ,[BlogContent]
+           ,[DeleteFlag])
+            VALUES
+           (@BlogTitle,
+           @BlogAuthor,
+           @BlogContent,
+              0)";
+
+                var result = db.Execute(Query, new BlogDataModel
+                {
+                    BlogTitle = title,
+                    BlogAuthor = author,
+                    BlogContent = content
+
+                });
+                Console.WriteLine(result == 1 ? "Saving Successful" : "Saving Failed"
+);
+
+
+            }
+
+
 
         }
     }

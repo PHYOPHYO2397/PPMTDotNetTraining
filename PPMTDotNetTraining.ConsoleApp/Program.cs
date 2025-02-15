@@ -26,6 +26,8 @@ AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
 //adoDotNetExample.Delete();
 
 DapperExample dapperExample = new DapperExample();
-dapperExample.Read();
+//dapperExample.Read();
+dapperExample.Create("Dapper", "Dapper", "Dapper");
+
 Console.ReadKey();
 
