@@ -70,5 +70,41 @@ namespace PPMTDotNetTraining.ConsoleApp
 
 
         }
+
+        public void Edit(int id)
+        {
+
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = @"SELECT [BlogId]
+              ,[BlogTitle]
+              ,[BlogAuthor]
+              ,[BlogContent]
+              ,[DeleteFlag]
+                FROM [dbo].[Tbl_Blog] where deleteFlag=0  and [BlogId]=@BlogId";
+                var item = db.Query<BlogDataModel>(query, new
+                {
+                    BlogId = id
+                }).FirstOrDefault();
+
+                if (item == null)
+                {
+                    Console.WriteLine("No Data Found");
+                    return;
+                }
+           
+                
+                    Console.WriteLine(item.BlogTitle);
+                    Console.WriteLine(item.BlogId);
+                    Console.WriteLine(item.BlogAuthor);
+                    Console.WriteLine(item.BlogContent);
+
+                
+            }
+
+        }
+
+
+
     }
 }
