@@ -82,9 +82,9 @@ namespace PPMTDotNetTraining.ConsoleApp
               ,[BlogContent]
               ,[DeleteFlag]
                 FROM [dbo].[Tbl_Blog] where deleteFlag=0  and [BlogId]=@BlogId";
-                var item = db.Query<BlogDataModel>(query, new
+                var item = db.Query<BlogDataModel>(query, new BlogDataModel
                 {
-                    BlogId = id
+                    BlogId= id
                 }).FirstOrDefault();
 
                 if (item == null)
@@ -103,6 +103,61 @@ namespace PPMTDotNetTraining.ConsoleApp
             }
 
         }
+
+        //Update
+
+        public void Update()
+        {
+
+            Console.WriteLine("BlogId");
+            string id =Console.ReadLine();
+          
+            Console.WriteLine("BlogTitle");
+            string title = Console.ReadLine();
+            Console.WriteLine("BlogAuthor");
+            string author = Console.ReadLine();
+            Console.WriteLine("BlogContent");
+            string content = Console.ReadLine();
+
+
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+               
+
+                String Query = @"UPDATE [dbo].[Tbl_Blog]
+               SET [BlogTitle] =@BlogTitle
+             ,[BlogAuthor] = @BlogAuthor
+            ,[BlogContent] = @BlogContent
+           ,[DeleteFlag] = 0
+           WHERE [BlogId] =@BlogId";
+
+                var result = db.Execute(Query, new BlogDataModel
+                {
+                    BlogId = Convert.ToInt32(id),
+                    BlogTitle = title,
+                    BlogAuthor = author,
+                    BlogContent = content
+
+
+                });
+
+
+
+
+
+
+                Console.WriteLine(result == 1 ? "Saving Successful" : "Saving Failed"
+);
+
+
+            }
+
+
+
+        }
+
+
+        //Delete
 
 
 

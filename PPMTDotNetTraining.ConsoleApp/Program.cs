@@ -28,8 +28,9 @@ AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
 DapperExample dapperExample = new DapperExample();
 //dapperExample.Read();
 //dapperExample.Create("Dapper", "Dapper", "Dapper");
-dapperExample.Edit(2);
-dapperExample.Edit(20000);
+//dapperExample.Edit(2);
+//dapperExample.Edit(20000);
+dapperExample.Update();
 
 
 
