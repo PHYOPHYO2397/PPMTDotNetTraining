@@ -30,8 +30,8 @@ DapperExample dapperExample = new DapperExample();
 //dapperExample.Create("Dapper", "Dapper", "Dapper");
 //dapperExample.Edit(2);
 //dapperExample.Edit(20000);
-dapperExample.Update();
-
+//dapperExample.Update();
+dapperExample.Delete();
 
 
 Console.ReadKey();

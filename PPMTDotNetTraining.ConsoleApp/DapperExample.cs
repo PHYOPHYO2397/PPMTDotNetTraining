@@ -103,15 +103,11 @@ namespace PPMTDotNetTraining.ConsoleApp
             }
 
         }
-
-        //Update
-
         public void Update()
         {
 
             Console.WriteLine("BlogId");
             string id =Console.ReadLine();
-          
             Console.WriteLine("BlogTitle");
             string title = Console.ReadLine();
             Console.WriteLine("BlogAuthor");
@@ -157,7 +153,38 @@ namespace PPMTDotNetTraining.ConsoleApp
         }
 
 
-        //Delete
+        public void Delete()
+        {
+
+            Console.WriteLine("BlogId");
+            string id = Console.ReadLine();
+      
+
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            { 
+
+                String Query = @"DELETE FROM [dbo].[Tbl_Blog]
+                WHERE [BlogId]=@BlogId";
+
+                var result = db.Execute(Query, new BlogDataModel
+                {
+                    BlogId = Convert.ToInt32(id)
+                    
+
+
+                });
+
+
+
+                Console.WriteLine(result == 1 ? "Delete Successful" : "Delete Failed"
+);
+
+
+            }
+
+
+
+        }
 
 
 
